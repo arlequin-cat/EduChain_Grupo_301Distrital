@@ -1,0 +1,4 @@
+# Requirements - Dependencias de Python para EduChain
+# Instalar con: pip install -r requirements.txt
+
+cryptography>=41.0.0
