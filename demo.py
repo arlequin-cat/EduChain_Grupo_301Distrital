@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+           # -*- coding: utf-8 -*-
 """
 demo.py - Demostracion Completa del Sistema EduChain
 
@@ -579,17 +579,7 @@ def main():
         """)
         
         print_success("DEMOSTRACION COMPLETADA EXITOSAMENTE")
-        
-        print("""
-        El sistema EduChain esta listo para:
-        - Registrar calificaciones de forma segura
-        - Proteger contra modificacion de datos
-        - Autenticar profesores mediante criptografia
-        - Detectar cualquier intento de fraude
-        
-        Exito en la sustentacion!
-        """)
-        
+
     except Exception as e:
         print_error(f"Error durante la demostracion: {e}")
         import traceback
