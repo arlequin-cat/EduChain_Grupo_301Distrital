@@ -4,7 +4,7 @@
 **Ingeniería en Telemática**  
 **Asignatura: Criptología**  
 **Profesor: Msc. Ing. Óscar Gabriel Espejo Mojica**
-**Estudiantes: Chary , Javier Santiago Ramirez Marin, Michael Alexander Arcos Murcia
+**Estudiantes: Chary Yuliana Bejarano Beltrán , Javier Santiago Ramirez Marin, Michael Alexander Arcos Murcia
 ---
 
 ## 📋 Descripción del Proyecto
@@ -325,6 +325,7 @@ Este proyecto es para fines educativos - Universidad Distrital FJC.
 ## 👥 Autores
 
 **Grupo 301** - Proyecto Final de Criptología
+Chary Yuliana Bejarano Beltrán , Javier Santiago Ramirez Marin, Michael Alexander Arcos Murcia
 
 ---
 
