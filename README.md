@@ -4,7 +4,7 @@
 **Ingeniería en Telemática**  
 **Asignatura: Criptología**  
 **Profesor: Msc. Ing. Óscar Gabriel Espejo Mojica**
-
+**Estudiantes: Chary , Javier Santiago Ramirez Marin, Michael Alexander Arcos Murcia
 ---
 
 ## 📋 Descripción del Proyecto
