@@ -115,7 +115,7 @@ raiz = merkle.get_root()  # 64 caracteres hex
 ### 3. ECDSA (Firma Digital)
 
 **¿Qué es?**  
-ECDSA (Elliptic Curve Digital Signature Algorithm) es un algoritmo de firma digital que utiliza critografía de curvas elípticas. Es el mismo algoritmo usado por Bitcoin.
+ECDSA (Elliptic Curve Digital Signature Algorithm) es un algoritmo de firma digital que utiliza criptografía de curvas elípticas. Es el mismo algoritmo usado por Bitcoin.
 
 **Curve utilizada:** secp256r1 (P-256)
 - Tamaño de clave: 256 bits

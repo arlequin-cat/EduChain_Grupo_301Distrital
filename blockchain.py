@@ -486,12 +486,6 @@ class Blockchain:
         block.transactions = original_transactions
 
         return not is_valid
-        
-        print(f"\n  - Ataque detectado?: {'[OK] SI' if not is_valid else '[ERROR] NO'}")
-        print(f"  - Mensaje: {message}")
-        
-        return not is_valid
-
 
 # =============================================================================
 # PRUEBAS Y DEMOSTRACION

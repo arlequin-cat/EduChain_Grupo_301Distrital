@@ -322,7 +322,8 @@ def verify_transaction_authenticity(
     """
     try:
         # Reconstruir clave publica desde hex
-        public_key = serialization.load_der_public_key(
+        public_key = ec.EllipticCurvePublicKey.from_encoded_point(
+            ec.SECP256R1(),
             binascii.unhexlify(public_key_hex)
         )
         return verify_signature(payload, signature, public_key)

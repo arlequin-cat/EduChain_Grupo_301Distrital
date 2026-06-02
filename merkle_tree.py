@@ -80,8 +80,9 @@ class MerkleTree:
         
         # Si solo hay una transaccion, la raiz es esa transaccion hasheada dos veces
         if len(self.leaves) == 1:
-            # Duplicar la hoja y hashear
-            self.leaves.append(self.leaves[0])
+            self.tree.append(self.leaves[:])
+            self.root = self.leaves[0]
+            return
         
         # Construir niveles
         current_level = self.leaves[:]
