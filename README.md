@@ -273,7 +273,7 @@ El demo ejecuta los 4 escenarios obligatorios para la sustentación.
 - Se intenta modificar una nota directamente
 - Se demuestra que la Merkle Root no coincide
 - Se demuestra que el hash del bloque no coincide
-- La cadena se detecta como inválida
+- Se demuestra que una versión modificada del bloque produce un Merkle Root y un hash diferentes, por lo que el ataque sería detectado.
 
 ### Escenario 4: Intento de Emisión No Autorizada
 
@@ -300,7 +300,7 @@ El demo ejecuta los 4 escenarios obligatorios para la sustentación.
 
 1. **ECDSA:** Solo la clave privada puede crear firmas
 2. **Smart Contract:** Solo acepta claves de profesores registrados
-3. **Verificación:** Cada transacción se verifica криптográficamente
+3. **Verificación:** Cada transacción se verifica criptográficamente
 
 **Resultado:** Nadie puede hacerse pasar por un profesor.
 

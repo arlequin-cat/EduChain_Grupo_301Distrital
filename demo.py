@@ -51,6 +51,28 @@ def print_warning(message):
     """Imprime advertencia."""
     print(f"[ADVERTENCIA] {message}")
 
+def print_transaction_summary(tx, indent="      "):
+    """
+    Imprime una transacción de forma resumida para la demo.
+
+    Si la transacción es un diccionario, muestra:
+    - payload
+    - firma abreviada
+    - PK_hex abreviado
+
+    Si la transacción es string, la imprime directamente.
+    """
+    if isinstance(tx, dict):
+        payload = tx.get('payload', '')
+        signature = tx.get('signature', '')
+        public_key = tx.get('public_key', '')
+
+        print(f"{indent}- Payload: {payload}")
+        print(f"{indent}  Firma: {signature[:32]}...")
+        print(f"{indent}  PK_hex: {public_key[:32]}...")
+    else:
+        print(f"{indent}- {tx}")
+
 
 # =============================================================================
 # ESCENARIO 1: CREACION DE LA CADENA (BLOQUE GENESIS)
@@ -296,7 +318,7 @@ def escenario_3_modificacion_historica(blockchain):
     print(f"    - Transacciones: {len(bloque_notas.transactions)}")
     
     for tx in bloque_notas.transactions:
-        print(f"      - {tx}")
+        print_transaction_summary(tx)
     
     print_subheader("3.2 Intentando ataque (modificacion de nota)...")
     
