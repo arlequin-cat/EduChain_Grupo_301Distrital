@@ -223,7 +223,12 @@ class Block:
         print(f"  Transacciones: {len(self.transactions)}")
         
         for i, tx in enumerate(self.transactions):
-            print(f"    [{i}] {tx}")
+            if isinstance(tx, dict):
+                print(f"    [{i}] {tx.get('payload', '')}")
+                print(f"        Firma: {tx.get('signature', '')[:32]}...")
+                print(f"        PK_hex: {tx.get('public_key', '')[:32]}...")
+            else:
+                print(f"    [{i}] {tx}")
         
         print("=" * 60)
 

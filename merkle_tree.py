@@ -49,17 +49,24 @@ class MerkleTree:
         if self.transactions:
             self.build_tree()
     
-    def _hash_transaction(self, tx: str) -> str:
+    def _get_payload(self, tx) -> str:
         """
-        Hashea una transaccion individual.
-        
-        Args:
-            tx (str): Transaccion como string
-            
-        Returns:
-            str: Hash SHA-256 en hexadecimal
+        Obtiene el payload canónico de una transacción.
+
+        Si la transacción es un diccionario, usa el campo 'payload'.
+        Si la transacción ya es un string, lo usa directamente.
         """
-        return sha256(tx)
+        if isinstance(tx, dict):
+            return tx.get('payload', '')
+        return str(tx)
+
+
+    def _hash_transaction(self, tx) -> str:
+        """
+        Hashea una transacción individual usando únicamente su payload canónico.
+        """
+        payload = self._get_payload(tx)
+        return sha256(payload)
     
     def build_tree(self):
         """
@@ -126,27 +133,22 @@ class MerkleTree:
                 self.root = sha256("")
         return self.root
     
-    def get_proof(self, transaction: str) -> list:
+    def get_proof(self, transaction) -> list:
         """
-        Genera prueba de inclusion para una transaccion.
-        
-        Devuelve los hashes necesarios para verificar que una
-        transaccion esta en el arbol sin necesidad de todas las transacciones.
-        
-        Args:
-            transaction (str): Transaccion a probar
-            
-        Returns:
-            list: Lista de (hash, is_left) para verificacion
+        Genera prueba de inclusión para una transacción.
+        La comparación se hace sobre el payload canónico.
         """
-        if transaction not in self.transactions:
+        target_payload = self._get_payload(transaction)
+
+        payloads = [self._get_payload(tx) for tx in self.transactions]
+
+        if target_payload not in payloads:
             return []
-        
-        tx_hash = self._hash_transaction(transaction)
+
+        tx_hash = sha256(target_payload)
         proof = []
-        
-        # Encontrar la posicion de la transaccion
-        position = self.leaves.index(tx_hash)
+
+        position = payloads.index(target_payload)
         
         # Navegar el arbol generando prueba
         level = 0
@@ -176,7 +178,7 @@ class MerkleTree:
     
     def verify_proof(self, transaction: str, proof: list, root: str) -> bool:
         """
-        Verifica una prueba de inclusion de Merkle.
+        Verifica una prueba de inclusión de Merkle usando el payload canónico.
         
         Args:
             transaction (str): Transaccion a verificar
@@ -260,7 +262,8 @@ class MerkleTree:
         
         print(f"\nTransacciones ({len(self.transactions)}):")
         for i, tx in enumerate(self.transactions):
-            print(f"  [{i}] {tx[:50]}{'...' if len(tx) > 50 else ''}")
+            payload = self._get_payload(tx)
+            print(f"  [{i}] {payload[:50]}{'...' if len(payload) > 50 else ''}")
         
         print(f"\nRaiz de Merkle: {self.root}")
         

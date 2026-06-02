@@ -195,7 +195,7 @@ def escenario_2_profesor_emite_notas(blockchain):
                 materia,
                 nota
             )
-            transactions.append(tx['payload'])
+            transactions.append(tx)
             
             print(f"    OK {est_id} - {materia}: {nota}")
             
@@ -227,6 +227,17 @@ def escenario_2_profesor_emite_notas(blockchain):
     is_valid, message = blockchain.is_chain_valid()
     print(f"\n  - Cadena valida?: {'SI' if is_valid else 'NO'}")
     print(f"  - Mensaje: {message}")
+
+    auth_valid, auth_errors = sc.verify_chain_authorization(blockchain.get_chain_data())
+
+    print(f"\n  - Autorizacion criptografica de transacciones?: {'SI' if auth_valid else 'NO'}")
+
+    if auth_errors:
+        print("  Errores de autorizacion:")
+        for error in auth_errors:
+            print(f"    - {error}")
+    else:
+        print("  Todas las transacciones del bloque tienen firma valida y profesor autorizado.")
     
     print("\n  Estado de la cadena:")
     print(f"    - Bloques totales: {len(blockchain.chain)}")
@@ -299,14 +310,28 @@ def escenario_3_modificacion_historica(blockchain):
     original_hash = bloque_notas.hash
     
     # Simular ataque: modificar transacciones
-    transacciones_atacadas = original_transactions.copy()
-    for i, tx in enumerate(transacciones_atacadas):
-        if "EST001" in tx:
-            # Cambiar nota de 4.5 a 5.0
-            transacciones_atacadas[i] = tx.replace("4.5", "5.0")
+    transacciones_atacadas = []
+
+    for tx in original_transactions:
+        if isinstance(tx, dict):
+            tx_atacada = tx.copy()
+
+            if tx_atacada.get('student_id') == "EST001":
+                tx_atacada['grade'] = 5.0
+                tx_atacada['payload'] = tx_atacada['payload'].replace("4.5", "5.0")
+
+            transacciones_atacadas.append(tx_atacada)
+        else:
+            if "EST001" in tx:
+                transacciones_atacadas.append(tx.replace("4.5", "5.0"))
+            else:
+                transacciones_atacadas.append(tx)
     
-    print(f"  Transaccion original: {original_transactions[0]}")
-    print(f"  Transaccion modificada: {transacciones_atacadas[0]}")
+    tx_original_print = original_transactions[0]['payload'] if isinstance(original_transactions[0], dict) else original_transactions[0]
+    tx_atacada_print = transacciones_atacadas[0]['payload'] if isinstance(transacciones_atacadas[0], dict) else transacciones_atacadas[0]
+
+    print(f"  Transaccion original: {tx_original_print}")
+    print(f"  Transaccion modificada: {tx_atacada_print}")
     
     print_subheader("3.3 Verificando integridad...")
     
@@ -468,7 +493,10 @@ def escenario_4_emision_no_autorizada(blockchain):
     
     print(f"\n  Las calificaciones originales estan seguras:")
     for tx in bloque_notas.transactions:
-        print(f"    - {tx}")
+        if isinstance(tx, dict):
+            print(f"    - {tx.get('payload', '')}")
+        else:
+            print(f"    - {tx}")
     
     print("""
     

@@ -106,6 +106,8 @@ transacciones = [
     "PROF001|EST002|Calculo I|3.8",
 ]
 
+En la implementación final, cada transacción se almacena como un objeto que contiene payload, firma, clave pública del docente, ID del profesor, ID del estudiante, asignatura y nota. El Árbol de Merkle se calcula únicamente sobre el payload canónico.
+
 merkle = MerkleTree(transacciones)
 raiz = merkle.get_root()  # 64 caracteres hex
 ```
@@ -117,7 +119,7 @@ raiz = merkle.get_root()  # 64 caracteres hex
 **¿Qué es?**  
 ECDSA (Elliptic Curve Digital Signature Algorithm) es un algoritmo de firma digital que utiliza criptografía de curvas elípticas. Es el mismo algoritmo usado por Bitcoin.
 
-**Curve utilizada:** secp256r1 (P-256)
+**Curve utilizada:** secp256k1
 - Tamaño de clave: 256 bits
 - Nivel de seguridad: 128 bits (equivalente a RSA-3072)
 
