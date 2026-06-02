@@ -7,9 +7,9 @@ de manera eficiente todas las transacciones en un bloque.
 
 Estructura:
         [Raiz de Merkle]
-           /      \
-      [Nodo A]  [Nodo B]
-       /   \      /   \
+           //      \\
+       [Nodo A]    [Nodo B]
+       //   \\      //   \\
    [Tx1] [Tx2] [Tx3] [Tx4]
 
 Beneficios:
@@ -162,10 +162,10 @@ class MerkleTree:
             # Obtener hash del hermano
             if sibling_position < len(current_level):
                 sibling_hash = current_level[sibling_position]
-                proof.append((sibling_hash, not is_left))
+                proof.append((sibling_hash, is_left))
             else:
                 # Si no hay hermano, somos el ultimo y duplicamos
-                proof.append((current_level[current_position], not is_left))
+                proof.append((current_level[current_position], is_left))
             
             # Subir al siguiente nivel
             current_position = current_position // 2
@@ -257,7 +257,7 @@ class MerkleTree:
             print("  (Sin transacciones - Arbol vacio)")
             return
         
-        print(f"\nTransacciones ({len(self.transacciones)}):")
+        print(f"\nTransacciones ({len(self.transactions)}):")
         for i, tx in enumerate(self.transactions):
             print(f"  [{i}] {tx[:50]}{'...' if len(tx) > 50 else ''}")
         

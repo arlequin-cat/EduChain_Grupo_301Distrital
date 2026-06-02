@@ -394,7 +394,7 @@ def escenario_4_emision_no_autorizada(blockchain):
     Este escenario prueba la seguridad del Smart Contract:
     
     Intentos que deben ser rechazados:
-    1. Estudiante tentandose ponerse una nota
+    1. Estudiante intentando ponerse una nota
     2. Atacante externo intentando modificar calificaciones
     
     El Smart Contract usa criptografia para verificar:
@@ -482,7 +482,7 @@ def escenario_4_emision_no_autorizada(blockchain):
        - Solo acepta claves de profesores registrados
     
     2. El Smart Contract verifica el rol
-       - Students y atacantes tienen rol NO_AUTORIZADO
+       - Estudiantes y atacantes tienen rol NO_AUTORIZADO
     
     3. La firma digital ECDSA
        - Solo el poseedor de la clave privada puede firmar
@@ -573,7 +573,7 @@ def main():
         ========================================================================
         - Escenario 1   - Creacion de cadena y bloque genesis
         - Escenario 2   - Emision de notas por profesor
-        - Escenario 3   - Detencion de ataque de modificacion
+        - Escenario 3   - Detección de ataque de modificación
         - Escenario 4   - Rechazo de emision no autorizada
         ========================================================================
         """)

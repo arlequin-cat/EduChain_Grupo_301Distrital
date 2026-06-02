@@ -476,11 +476,16 @@ class Blockchain:
         print(f"  Merkle Root original:  {original_merkle[:20]}...")
         print(f"  Nuevo Merkle Root:      {new_merkle[:20]}...")
         
-        # Restaurar (solo para demo)
-        block.transactions = original_transactions
-        
-        # Verificar si se detecta
+        # Verificar si se detecta ANTES de restaurar
         is_valid, message = self.is_chain_valid()
+
+        print(f"\n  - Ataque detectado?: {'[OK] SI' if not is_valid else '[ERROR] NO'}")
+        print(f"  - Mensaje: {message}")
+
+        # Restaurar despues de la validacion
+        block.transactions = original_transactions
+
+        return not is_valid
         
         print(f"\n  - Ataque detectado?: {'[OK] SI' if not is_valid else '[ERROR] NO'}")
         print(f"  - Mensaje: {message}")

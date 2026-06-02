@@ -271,7 +271,8 @@ class SmartContract:
             
             # Cargar clave publica
             try:
-                public_key = serialization.load_der_public_key(
+                public_key = ec.EllipticCurvePublicKey.from_encoded_point(
+                    ec.SECP256R1(),
                     binascii.unhexlify(public_key_hex)
                 )
             except Exception as e:
