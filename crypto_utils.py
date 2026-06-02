@@ -98,7 +98,7 @@ class ECDSAVerifier:
     ECDSA es un algoritmo de firma digital que utiliza criptografia de curvas elipticas.
     Es el mismo algoritmo usado por Bitcoin para firmas digitales.
     
-    Curve utilizada: secp256r1 (P-256)
+    Curve utilizada: secp256k1
     - Tamano de clave: 256 bits
     - Nivel de seguridad: 128 bits (equivalente a RSA-3072)
     - Eficiente computacionalmente
@@ -121,8 +121,8 @@ class ECDSAVerifier:
             public_key: Clave publica (opcional, se deriva de la privada)
         """
         if private_key is None:
-            # Generar nuevo par de claves usando curva secp256r1 (P-256)
-            self.private_key = ec.generate_private_key(ec.SECP256R1())
+            # Generar nuevo par de claves usando curva secp256k1
+            self.private_key = ec.generate_private_key(ec.SECP256K1())
         else:
             self.private_key = private_key
             
@@ -219,7 +219,7 @@ def generate_keypair() -> tuple:
     Returns:
         tuple: (private_key, public_key)
     """
-    private_key = ec.generate_private_key(ec.SECP256R1())
+    private_key = ec.generate_private_key(ec.SECP256K1())
     public_key = private_key.public_key()
     return private_key, public_key
 
